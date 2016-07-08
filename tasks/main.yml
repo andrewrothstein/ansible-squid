@@ -1,0 +1,22 @@
+---
+- name: install pkgs
+  become: yes
+  become_user: root
+  with_items:
+    - squid
+  package: name={{item}} state=present
+
+- name: configure...
+  become: yes
+  become_user: root
+  with_items:
+    - etc/squid/squid.conf
+  template: >-
+    src={{item}}.j2
+    dest=/{{item}}
+    owner=root
+    group=root
+    mode=0644
+
+- name: launch...
+  service: name=squid state=started enabled=yes
