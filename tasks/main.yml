@@ -1,22 +1,17 @@
 ---
-- name: install pkgs
+- name: resolve platform specific vars
+  include_vars: '{{ item }}'
+  with_first_found:
+    - files:
+        - '{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml'
+        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
+      skip: true
+      paths:
+        - '{{ role_path }}/vars'
+- name: install squid
   become: yes
   become_user: root
-  with_items:
-    - squid
-  package: name={{item}} state=present
-
-- name: configure...
-  become: yes
-  become_user: root
-  with_items:
-    - etc/squid/squid.conf
-  template: >-
-    src={{item}}.j2
-    dest=/{{item}}
-    owner=root
-    group=root
-    mode=0644
-
-- name: launch...
-  service: name=squid state=started enabled=yes
+  package:
+    name: squid
+    state: present
