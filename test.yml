@@ -2,3 +2,9 @@
 - hosts: all
   roles:
   - role: '{{ playbook_dir }}'
+  tasks:
+  - command: squid --version
+    register: squid_test_output
+  - name: squid --version
+    debug:
+      msg: '{{ squid_test_output.stdout }}'

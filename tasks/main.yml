@@ -10,7 +10,7 @@
       paths:
         - '{{ role_path }}/vars'
 - name: install squid
-  become: yes
+  become: true
   become_user: root
   package:
     name: squid

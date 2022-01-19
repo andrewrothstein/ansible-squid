@@ -1,6 +1,6 @@
 andrewrothstein.squid
 =========
-[![Build Status](https://travis-ci.org/andrewrothstein/ansible-squid.svg?branch=master)](https://travis-ci.org/andrewrothstein/ansible-squid)
+![Build Status](https://github.com/andrewrothstein/ansible-squid/actions/workflows/build.yml/badge.svg)
 
 Installs [Squid](http://www.squid-cache.org/)
 
