@@ -1,10 +1,13 @@
 ---
-- hosts: all
+- name: Testing andrewrothstein.squid
+  hosts: all
   roles:
-  - role: '{{ playbook_dir }}'
+    - role: '{{ playbook_dir }}'
   tasks:
-  - command: squid --version
-    register: squid_test_output
-  - name: squid --version
-    debug:
-      msg: '{{ squid_test_output.stdout }}'
+    - name: Executing 'squid --version'
+      ansible.builtin.command: squid --version
+      changed_when: false
+      register: squid_test_output
+    - name: Output from 'squid --version'
+      ansible.builtin.debug:
+        msg: '{{ squid_test_output.stdout }}'
